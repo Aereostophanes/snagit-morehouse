@@ -1,9 +1,9 @@
-# endorse-the-settlers
-Code for HackATL 2016
+# snagit-morehouse
+Code for Senior/Junior Seminar Final Project
 
 Introduction
 ============
-This is backend code for iOS Mobile Application, Endorse. Endorse won Third place at HackATL 2016 hosted by Google on 11/06/2016
+This is backend code for a senior/junior seminar app, SnagIt.
 
 Authors
 =======

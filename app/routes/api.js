@@ -1,6 +1,6 @@
 //  api.js
 //  SnagIt
-// URL FOR HEROKU SERVER: https://polar-cliffs-15273.herokuapp.com/
+// URL FOR HEROKU SERVER: https://damp-mesa-12155.herokuapp.com/
 
 var User = require("../models/user");
 
