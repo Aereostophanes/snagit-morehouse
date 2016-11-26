@@ -158,10 +158,41 @@ module.exports = function(app, express) {
 	 */
 	
 	// new api route for books, see line 24.
+	apiRouter.route("/books")
+		// new get actions for new books
+		.get(function(req, res) {
+			//attempt to find all books
+			Book.find(function(err, books) {
+				//if error, return error
+				if (err)
+					res.send(err);
+				
+				//return all books
+				res.json(books);
+			});
+		});
 	
 		// new post actions for new books, see line 27.
-		
-		// new route to get all books, see line 49.
+		.post(function(req, res) {
+			var book = new Book();
+			
+			//set book information (which comes from request)
+			book.firstName      = req.body.title;
+			book.lastName       = req.body.author;
+			book.user_id        = req.body.user_id;
+			book.for_sale       = req.body.for_sale;
+			book.selling_price  = req.body.selling_price;
+			book.course         = req.body.course;
+			book.condition      = req.body.condition;
+			
+			book.save(function(err) {
+				if (err) {
+					return res.send(err);
+				}
+				
+				res.json({ errmsg: "Nil", message: "Book created!", book_id: book.id, title: book.title });
+			});
+		});
 	
 	/*
 	 implement a get route to get books based on the following search keys: name, course, price, condition. See line 63.
