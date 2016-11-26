@@ -2,7 +2,8 @@
 //  SnagIt
 // URL FOR HEROKU SERVER: https://damp-mesa-12155.herokuapp.com/
 
-var User = require("../models/user");
+var User = require('../models/user');
+var Book = require('../models/book');
 
 module.exports = function(app, express) {
 	
@@ -11,14 +12,13 @@ module.exports = function(app, express) {
 	//middleware to use for all requests
 	apiRouter.use(function(req, res, next) {
 		//authenticate users here
-		
 		next();
 	});
 	
 	//root response for api
 	//accessed at http://endorse-backend-api.herokuapp.com/api/
 	apiRouter.get("/", function(req, res) {
-		res.json({ message: "Hooray! Welcome to List API!" });
+		res.json({ message: "Welcome to List API!" });
 	});
 	
 	apiRouter.route("/users")
@@ -151,6 +151,32 @@ module.exports = function(app, express) {
 					res.json({ message: 'Successfully deleted' });
 			});
 		});
+	
+	
+	/*
+	 Comments for other devs. The following need to be done:
+	 */
+	
+	// new api route for books, see line 24.
+	
+		// new post actions for new books, see line 27.
+		
+		// new route to get all books, see line 49.
+	
+	/*
+	 implement a get route to get books based on the following search keys: name, course, price, condition. See line 63.
+	 
+	 The idea here is that the front end will make a request that has a body like this:
+	 
+	 {
+	 	searchKey: name,
+		searchValue: Fundamentals of physics
+	 }
+	 
+	 Then, you will make a query to the database based on this object and return all books that fit that description. 
+	 
+	 The 'findBy' Mongoose method might be useful here.
+	 */
 	
 	return apiRouter;
 }
