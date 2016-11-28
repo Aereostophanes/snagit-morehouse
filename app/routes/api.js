@@ -4,6 +4,7 @@
 
 var User = require('../models/user');
 var Book = require('../models/book');
+var Transaction = require('../models/transaction');
 
 module.exports = function(app, express) {
 	
@@ -170,15 +171,15 @@ module.exports = function(app, express) {
 				//return all books
 				res.json(books);
 			});
-		});
+		})
 	
 		// new post actions for new books, see line 27.
 		.post(function(req, res) {
 			var book = new Book();
 			
 			//set book information (which comes from request)
-			book.firstName      = req.body.title;
-			book.lastName       = req.body.author;
+			book.title          = req.body.title;
+			book.author         = req.body.author;
 			book.user_id        = req.body.user_id;
 			book.for_sale       = req.body.for_sale;
 			book.selling_price  = req.body.selling_price;
@@ -208,6 +209,28 @@ module.exports = function(app, express) {
 	 
 	 The 'findBy' Mongoose method might be useful here.
 	 */
+	 apiRouter.route("/transactions")
+	 	.get(function(req, res) {
+	 		Transaction.find(function(err, transactions) {
+	 			if (err)
+	 				res.send(err);
+	 			res.json(transactions);
+	 		});
+	 	})
+	 	.post(function(req, res) {
+	 		var transaction = new Transaction();
+
+	 		//set transaction information (which comes from request)
+	 		transaction.buy_user_id = req.body.buy_user_id;
+	 		transaction.sell_user_id = req.body.sell_user_id;
+	 		transaction.book_id = req.body.book_id;
+
+	 		transaction.save(function(err) {
+	 			if (err)
+	 				return res.send(err);
+	 			res.json({ errmsg : "Nil", message : "Transaction created!", buy_user_id : transaction.buy_user_id, sell_user_id : transaction.sell_user_id, book_id : transaction.book_id})
+	 		});
+	 	});
 	
 	return apiRouter;
 }
