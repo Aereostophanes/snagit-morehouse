@@ -30,7 +30,7 @@ var db;
 // Connect to the database before starting the application server.
 var localDatabase = "mongodb://localhost/endorse";
 var productionDatabase = process.env.MONGODB_URI;
-var currentDatabase = (process.env.HOME == "/Users/aereostophanes") ? localDatabase : productionDatabase;
+var currentDatabase = (process.env.HOME == "/Users/aereostophanes"||process.env.HOME == "/Users/layomiakinrinade") ? localDatabase : productionDatabase;
 mongoose.connect(currentDatabase, function(err, database) {
   if (err) {
     console.log(err);

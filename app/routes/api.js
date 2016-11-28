@@ -170,17 +170,17 @@ module.exports = function(app, express) {
 				//return all books
 				res.json(books);
 			});
-		});
+		})
 	
-		// new post actions for new books, see line 27.
+		// new post action for new books, see line 27.
 		.post(function(req, res) {
 			var book = new Book();
 			
 			//set book information (which comes from request)
-			book.firstName      = req.body.title;
-			book.lastName       = req.body.author;
+			book.title          = req.body.title;
+			book.author         = req.body.author;
 			book.user_id        = req.body.user_id;
-			book.for_sale       = req.body.for_sale;
+			book.for_sale       = true;
 			book.selling_price  = req.body.selling_price;
 			book.course         = req.body.course;
 			book.condition      = req.body.condition;
@@ -190,7 +190,7 @@ module.exports = function(app, express) {
 					return res.send(err);
 				}
 				
-				res.json({ errmsg: "Nil", message: "Book created!", book_id: book.id, title: book.title });
+				res.json({ errmsg: "Nil", message: "Book added!", book_id: book.id, title: book.title });
 			});
 		});
 	
