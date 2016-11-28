@@ -173,7 +173,7 @@ module.exports = function(app, express) {
 			});
 		})
 	
-		// new post actions for new books, see line 27.
+		// new post action for new books, see line 27.
 		.post(function(req, res) {
 			var book = new Book();
 			
@@ -181,7 +181,7 @@ module.exports = function(app, express) {
 			book.title          = req.body.title;
 			book.author         = req.body.author;
 			book.user_id        = req.body.user_id;
-			book.for_sale       = req.body.for_sale;
+			book.for_sale       = true;
 			book.selling_price  = req.body.selling_price;
 			book.course         = req.body.course;
 			book.condition      = req.body.condition;
@@ -191,7 +191,7 @@ module.exports = function(app, express) {
 					return res.send(err);
 				}
 				
-				res.json({ errmsg: "Nil", message: "Book created!", book_id: book.id, title: book.title });
+				res.json({ errmsg: "Nil", message: "Book added!", book_id: book.id, title: book.title });
 			});
 		});
 	
@@ -231,6 +231,34 @@ module.exports = function(app, express) {
 	 			res.json({ errmsg : "Nil", message : "Transaction created!", buy_user_id : transaction.buy_user_id, sell_user_id : transaction.sell_user_id, book_id : transaction.book_id})
 	 		});
 	 	});
-	
+	apiRouter.get("/books/find", function(req, res) {
+		
+		// errors in request parameters
+		if ( !(req.param('searchKey')) || !(req.param('searchValue')) ) {
+			res.json({
+				success: false,
+				message: 'Invalid request parameters'
+			});	
+		}
+		
+		// attempt to find books
+		Book.find({
+			[req.param('searchKey')]: new RegExp(req.param('searchValue'), 'i')
+		}).select('title author selling_price course condition').exec(function(err, books) {
+			if (err) throw err;
+			
+			// no books with those specifications were found
+			if (!books) {
+				res.json({
+					success: false,
+					message: 'No books found.'
+				});
+			} else if (books) {
+				res.json(books);
+			}
+
+		});
+		
+	});	
 	return apiRouter;
 }
