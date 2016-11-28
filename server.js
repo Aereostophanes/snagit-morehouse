@@ -1,5 +1,5 @@
 //  server.js
-//  Endorse
+//  Snagit
 
 //CALL PACKAGES
 var express    = require("express");

@@ -1,5 +1,5 @@
-//  api.js
-//  SnagIt
+// api.js
+// SnagIt
 // URL FOR HEROKU SERVER: https://damp-mesa-12155.herokuapp.com/
 
 var User = require('../models/user');
@@ -195,20 +195,6 @@ module.exports = function(app, express) {
 			});
 		});
 	
-	/*
-	 implement a get route to get books based on the following search keys: name, course, price, condition. See line 63.
-	 
-	 The idea here is that the front end will make a request that has a body like this:
-	 
-	 {
-	 	searchKey: name,
-		searchValue: Fundamentals of physics
-	 }
-	 
-	 Then, you will make a query to the database based on this object and return all books that fit that description. 
-	 
-	 The 'findBy' Mongoose method might be useful here.
-	 */
 	 apiRouter.route("/transactions")
 	 	.get(function(req, res) {
 	 		Transaction.find(function(err, transactions) {
