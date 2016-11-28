@@ -231,6 +231,7 @@ module.exports = function(app, express) {
 	 			res.json({ errmsg : "Nil", message : "Transaction created!", buy_user_id : transaction.buy_user_id, sell_user_id : transaction.sell_user_id, book_id : transaction.book_id})
 	 		});
 	 	});
+	 	
 	apiRouter.get("/books/find", function(req, res) {
 		
 		// errors in request parameters
