@@ -1,6 +1,6 @@
 // api.js
 // SnagIt
-// URL FOR HEROKU SERVER: https://damp-mesa-12155.herokuapp.com/
+// URL FOR HEROKU SERVER: https://snagit-morehouse.herokuapp.com/
 
 var User = require('../models/user');
 var Book = require('../models/book');
